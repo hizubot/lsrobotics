@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Move!</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <button class="home-btn" onclick="window.location.href='index.html'">↑</button>
+    <div class="slide-counter"><span class="num-big" id="slide-number">01</span>/<span id="slide-total">99</span></div>
+    <div class="image-center" id="slide-media-container">
+        <video id="slide-media" autoplay loop muted playsinline>
+            <source src="srcs/img2/img2_2.mp4" type="video/mp4">
+        </video>
+        <img id="slide-media" src="srcs/img2/img2_1.png" alt="Slide image">
+    </div>
+    <button class="prev-btn" onclick="prevSlide()">←</button>
+    <button class="next-btn" onclick="nextSlide()">→</button>
+    <div class="info-box" id="slide-text">
+        This is mBot2, an educational robot!<br>
+        What is a robot? Do you know other robots?
+    </div>
+    <script src="script2.js"></script>
+</body>
+</html>
