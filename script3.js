@@ -69,7 +69,7 @@ const slides = [
         className: ""
     },
     {   //Slide 13
-        image: "srcs/img2/img2_13.png",
+        image: "srcs/img3/img3_13.png",
         text: `This code will display the French flag!<br>
         Finally, let’s try the German flag, do you remember the colors?`,
         className: ""
