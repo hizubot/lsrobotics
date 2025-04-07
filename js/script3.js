@@ -132,6 +132,7 @@ const slides = [
 
 const imageCache = [];
 let currentSlide = 0;
+let endSlideOn = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("slide-total").textContent = slides.length;
@@ -211,12 +212,17 @@ function nextSlide() {
         updateSlide();
     } else {
         endSlide();
+        endSlideOn=1;
     }
 }
 
 function prevSlide() {
     if (currentSlide > 0) {
         currentSlide--;
+        if (endSlideOn) {
+            currentSlide++;
+            endSlideOn=0;
+        }
         updateSlide();
     }
 }

@@ -18,7 +18,7 @@ const slides = [
     {   //Slide 4
         image: "../srcs/img4/img4_4.png",
         text: `The mBot2 uses a <strong>speaker</strong> to produce sounds!<br>
-        What is speaker? Where else do you find them?`,
+        What is a speaker? Where else do you find them?`,
         className: ""
     },
     {   //Slide 5
@@ -128,6 +128,7 @@ const slides = [
 
 const imageCache = [];
 let currentSlide = 0;
+let endSlideOn = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("slide-total").textContent = slides.length;
@@ -207,12 +208,17 @@ function nextSlide() {
         updateSlide();
     } else {
         endSlide();
+        endSlideOn=1;
     }
 }
 
 function prevSlide() {
     if (currentSlide > 0) {
         currentSlide--;
+        if (endSlideOn) {
+            currentSlide++;
+            endSlideOn=0;
+        }
         updateSlide();
     }
 }

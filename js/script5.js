@@ -1,119 +1,120 @@
 const slides = [
-    {   //Slide 1, 12x18 white box transparent
-        image: "../srcs/img1/img1_1.png",
-        text: `This is <strong>mBot2</strong>, an educational robot!<br>
-        What is a robot? Do you know other robots?`,
-        className: "anim-shake"
+    {   //Slide 1
+        image: "../srcs/img5/img5_1.png",
+        text: `Learn how to <strong>sense</strong> light with mBot2.`,
+        className: ""
     },
-    {   //Slide 2, 20x10 video board
-        image: "../srcs/img1/img1_2.png",
-        text: `Let’s review the principal components of mBot2.<br>
-        How many of them do you recognize?`,
+    {   //Slide 2
+        video: "../srcs/img5/img5_2.mp4",
+        text: `What is a sensor? Do we have sensors?<br>
+        What is their importance in robotics?`,
         className: ""
     },
     {   //Slide 3
-        image: "../srcs/img1/img1_3.png",
-        text: `This is <strong>CyberPi</strong>, the main controller of mBot2. It has all the operation logic.`,
-        className: ""
+        image: "../srcs/img5/img5_3.png",
+        text: `How does mBot2 sense light?`,
+        className: "anim-shake"
     },
     {   //Slide 4
-        image: "../srcs/img1/img1_4.png",
-        text: `These are the <strong>sensors</strong>, they take data from the environment and send it to the controller.`,
+        image: "../srcs/img5/img5_4.png",
+        text: `The mBot2 uses a <strong>light sensor</strong> to sense light!<br>
+        What is a light sensor? Where else do you find them?`,
         className: ""
     },
     {   //Slide 5
-        image: "../srcs/img1/img1_5.png",
-        text: `These are the <strong>actuators</strong>, specifically the motors. They make the mBot move.`,
+        image: "../srcs/img5/img5_5.png",
+        text: `Let’s start coding!<br>
+        Create a program that measure the light!`,
         className: ""
     },
     {   //Slide 6
-        image: "../srcs/img1/img1_6.png",
-        text: `This is the mBot2 shield, it has a battery and many ports to connect sensors and actuators.`,
+        image: "../srcs/img5/img5_6.png",
+        text: `Check the <strong>ambient light intensity</strong> box, a variable will appear in the stage.<br>
+        Is it constant?`,
         className: ""
     },
     {   //Slide 7
-        image: "../srcs/img1/img1_7.png",
-        text: `This is the mBot2 chassis, it is made of aluminum. It gives a strong structure to the robot.`,
+        image: "../srcs/img5/img5_7.png",
+        text: `Move your robot, cover its back and tilt it in different directions.<br>
+        How does the <strong>variable</strong> change?`,
         className: ""
     },
     {   //Slide 8
-        image: "../srcs/img1/img1_8.png",
-        text: `These are the screws, their function is to join parts together. Look at their differences.`,
+        image: "../srcs/img5/img5_8.png",
+        text: `Make a variable with the name <strong>light</strong>. This variable will store the sensor data.`,
         className: ""
     },
     {   //Slide 9
-        image: "../srcs/img1/img1_9.png",
-        text: `These are the cables, they connect the actuators and sensors to the mBot2 shield.`,
+        image: "../srcs/img5/img5_9.png",
+        text: `New blocks will appear, and the variable will be displayed in the upper left corner of the stage.`,
         className: ""
     },
-
     {   //Slide 10
-        image: "../srcs/img1/img1_10.png",
-        text: `The tires, wheels and mini wheel allows the robot to move freely.`,
+        image: "../srcs/img5/img5_10.png",
+        text: `Drag the following blocks. This script will store the <strong>ambient light intensity</strong> in the variable <strong>light</strong>.`,
         className: ""
     },
     {   //Slide 11
-        image: "../srcs/img1/img1_11.png",
-        text: `To start coding, turn on your mBot2.<br>
-        Remember to turn it off at the end of the class.`,
+        image: "../srcs/img5/img5_11.png",
+        text: `Add a <strong>forever loop</strong> to update constantly the variable. Otherwise, it will store the value only once.`,
         className: ""
     },
     {   //Slide 12
-        image: "../srcs/img1/img1_12.png",
-        text: `<a href='https://ide.mblock.cc' target='_blank' rel='noopener noreferrer'>Click here</a> to open mBlock IDE, press <strong>Ctrl+Tab</strong> to return here.<br>
-        What is an <i title="Integrated Development Environment">IDE</i>?`,
+        image: "../srcs/img5/img5_12.png",
+        text: `We will use the screen to display the light value.<br>
+        This is the label block, it can display up to 8 different labels.`,
         className: ""
     },
     {   //Slide 13
-        image: "../srcs/img1/img1_13.png",
-        text: `This is mBlock IDE.<br>
-        Let’s review the principal areas.`,
+        image: "../srcs/img5/img5_13.png",
+        text: `There are three labels with different text, position and size. Analyze their differences.`,
         className: ""
     },
     {   //Slide 14
-        image: "../srcs/img1/img1_14.png",
-        text: `In the Devices area, delete CyberPi and add mBot2.`,
+        image: "../srcs/img5/img5_14.png",
+        text: `Add a <strong>show label</strong> block and set the text to the variable.`,
         className: ""
     },
     {   //Slide 15
-        image: "../srcs/img1/img1_15.png",
-        text: `Set mBot2 as mostly used device. Next time mBot2 will appear as default device in mBlock.`,
+        image: "../srcs/img5/img5_15.png",
+        text: `Drag the <strong>join</strong> block and change its first text, the second text will be the variable.`,
         className: ""
     },
     {   //Slide 16
-        image: "../srcs/img1/img1_16.png",
-        text: `Click Bluetooth, select your mBot2 and Pair.<br>
-        You should be in Live mode.`,
+        image: "../srcs/img5/img5_16.png",
+        text: `Test your light detector by moving your mBot2.<br>
+        What are its maximum and minimum values?`,
         className: ""
     },
     {   //Slide 17
-        image: "../srcs/img1/img1_17.png",
-        text: `Open Setting and activate <strong>Block Area Fixed Pattern</strong>.<br>
-        Now you always see the available blocks.`,
+        image: "../srcs/img5/img5_17.png",
+        text: `Analyze this <strong>flowchart</strong>, there is a <strong>conditional</strong> structure and a <strong>loop</strong>.<br>
+        Can you explain it?`,
         className: ""
     },
     {   //Slide 18
-        image: "../srcs/img1/img1_18.png",
-        text: `Create your mBlock account!<br>
-        Click in panda icon and select Google.`,
+        image: "../srcs/img5/img5_18.png",
+        text: `Compare this mBlock script with the previous flowchart. Understand its structure.`,
         className: ""
     },
     {   //Slide 19
-        image: "../srcs/img1/img1_19.png",
-        text: `Select your Markham account and continue the process.<br>
-        You will see your profile icon.`,
+        image: "../srcs/img5/img5_19.png",
+        text: `Considering 50 as the threshold; light could be <strong>less than</strong>, <strong>greater than</strong> or <strong>equal</strong>. `,
         className: ""
     },
     {   //Slide 20
-        image: "../srcs/img1/img1_20.png",
-        text: `Remember to log in to all classes to save your projects to the cloud.<br>
-        Notice the change in the icon.`,
+        image: "../srcs/img5/img5_20.png",
+        text: `Drag the following blocks. This is the conditional structure using the light variable and LED blocks.`,
         className: ""
     },
     {   //Slide 21
-        image: "../srcs/img1/img1_21.png",
-        text: `Click <strong>play hi until done</strong> block.<br>
-        What does mBot2 do?`,
+        image: "../srcs/img5/img5_21.png",
+        text: `Drag the conditional structure under the label block and test your mBot2!`,
+        className: ""
+    },
+    {   //Slide 22
+        video: "../srcs/img5/img5_22.mp4",
+        text: `<strong>Challenge:</strong> Play your voice recording when the light sensor detects a high value.`,
         className: ""
     },
 ];
