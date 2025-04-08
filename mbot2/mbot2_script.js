@@ -40,7 +40,7 @@ function preloadMedia() {
         }
     });
     const extraImage = new Image();
-    extraImage.src = "../srcs/comm/trophy.png";
+    extraImage.src = "srcs/comm/trophy.png";
 }
 
 function updateSlide() {
