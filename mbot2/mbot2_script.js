@@ -83,7 +83,7 @@ function endSlide() {
         mediaElement = document.getElementById("slide-media");
     }
 
-    mediaElement.src = "../srcs/comm/trophy.png";
+    mediaElement.src = "srcs/comm/trophy.png";
     mediaElement.className = "anim-glow-shake";
 
     let rootStyles = getComputedStyle(document.documentElement);
