@@ -22,12 +22,15 @@ function loadSlidesScript(nivel) {
     const script = document.createElement("script");
     script.src = `mbot2/mbot2_${nivel}.js`;
     script.onload = () => {
-      document.getElementById("slide-total").textContent = slides.length;
-      preloadMedia();
-      updateSlide();
+        document.getElementById("slide-total").textContent = slides.length;
+        preloadMedia();
+        updateSlide();
     };
     script.onerror = () => {
-      document.getElementById("slide-text").textContent = "This level has not yet been implemented...";
+        document.getElementById("slide-text").textContent = "This level has not yet been implemented...";
+        const container = document.querySelector(".image-center");
+        container.innerHTML = `<img id="slide-media" alt="Slide media">`;
+        document.getElementById("slide-media").src = "srcs/comm/404.png";
     };
     document.body.appendChild(script);
   }
