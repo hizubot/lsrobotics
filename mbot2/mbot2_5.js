@@ -99,7 +99,7 @@ const slides = [
     },
     {   //Slide 19
         image: "srcs/mbot2/img5/img5_19.png",
-        text: `Considering 50 as the threshold; light could be <strong>less than</strong>, <strong>greater than</strong> or <strong>equal</strong>. `,
+        text: `Considering 50 as the threshold; light could be <strong>less than</strong>, <strong>greater than</strong> or <strong>equal</strong>.`,
         className: ""
     },
     {   //Slide 20
