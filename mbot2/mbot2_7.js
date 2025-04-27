@@ -105,7 +105,7 @@ const slides = [
     },
     {   //Slide 21
         image: "srcs/mbot2/img7/img7_21.png",
-        text: `Add a <strong>stop encoder motor</strong> block to complete your stop button.`,
+        text: `Add a <strong>stop encoder motor</strong> and <strong>clear screen</strong> blocks to complete your stop button.`,
         className: ""
     },
     {   //Slide 22

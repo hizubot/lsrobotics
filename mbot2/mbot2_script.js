@@ -6,7 +6,7 @@ const activityTitles = {
     "5": "Sensing light!",
     "6": "Display control!",
     "7": "Ultrasonic!",
-    "8": "Curve movements!",
+    "8": "Curved movements!",
   };
 
 const imageCache = [];
