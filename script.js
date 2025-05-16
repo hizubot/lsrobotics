@@ -5,9 +5,3 @@ function changeTitle() {
 window.onload = function() {
     setTimeout(changeTitle, 1500);
 };
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".device:nth-child(3)").addEventListener("click", function () {
-        document.getElementById("slide-device").style.display = "none";
-        document.getElementById("slide-activities").style.display = "flex";
-    });
-});

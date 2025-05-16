@@ -98,6 +98,28 @@ body {
     background-color: #e0e0e0;
     border: 2px solid var(--color-blue);
 }
+#footer {
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    gap: 1rem;                /* Espacio entre elementos */
+  }
+#loginBtn {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+#loginBtn:hover, #logoutBtn:hover {
+    transform: scale(1.1);
+    background-color: #e0e0e0;
+    border: 2px solid var(--color-blue);
+}
+#logoutBtn {
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    display: none;
+}
+#userInfo {
+    padding-top: 10px;;
+    font-size: 16px;
+}
 .activity-container {
     display: flex;
     flex-wrap: wrap;

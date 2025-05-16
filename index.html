@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technology & Innovation</title>
+    <link rel="icon" type="image/png" sizes="512x512" href="srcs/comm/web_favicon.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="srcs/comm/web_favicon.png">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>        
 </head>
@@ -15,64 +17,188 @@
     <div id="slide-device" class="slide">
         <h1>Select your device</h1>
         <div class="image-container">
-            <div class="device">
+            <div id="dev_cpi" class="device">
                 <img class="cpi" src="srcs/comm/cyberpi.png" alt="cyberpi">
                 <button class="button">CyberPi</button>
             </div>
             <div class="divider"></div>
-            <div class="device">
+            <div id="dev_mb2" class="device">
                 <img class="mb2" src="srcs/comm/mbot2.png" alt="mbot2">
                 <button class="button">mBot2</button>
             </div>
         </div>
-        <a href="https://ide.mblock.cc" target="_blank" rel="noopener noreferrer">
-            <img class="mbl" src="srcs/comm/mblock.jpeg" alt="mblock">
-        </a>
+        <div id="footer">
+            <a href="https://ide.mblock.cc" target="_blank" rel="noopener noreferrer">
+                <img class="mbl" src="srcs/comm/mblock.jpeg" alt="mblock">
+            </a>
+            <button id="loginBtn" class="button">Login with Google</button>
+            <p id="userInfo"></p>
+            <button id="logoutBtn" class="button">Logout</button>
+        </div>
     </div>
-    <div id="slide-activities" class="slide">
+    <div id="slide-mb2" class="slide">
         <h1>Tutorial activities</h1>
         <div class="activity-container">
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=1'">
+            <button class="activity" onclick="iniciarActividad(1)">
                 <span class="activity-number">1</span>
                 <img src="srcs/comm/act1.png" alt="Activity 1" class="activity-image">
                 <span class="activity-name">Meet mBot2!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=2'">
+            <button class="activity" onclick="iniciarActividad(2)">
                 <span class="activity-number">2</span>
                 <img src="srcs/comm/act2.png" alt="Activity 2" class="activity-image">
                 <span class="activity-name">Let's move!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=3'">
+            <button class="activity" onclick="iniciarActividad(3)">
                 <span class="activity-number">3</span>
                 <img src="srcs/comm/act3.png" alt="Activity 3" class="activity-image">
                 <span class="activity-name">LED show!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=4'">
+            <button class="activity" onclick="iniciarActividad(4)">
                 <span class="activity-number">4</span>
                 <img src="srcs/comm/act4.png" alt="Activity 4" class="activity-image">
                 <span class="activity-name">Listen to mBot2!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=5'">
+            <button class="activity" onclick="iniciarActividad(5)">
                 <span class="activity-number">5</span>
                 <img src="srcs/comm/act5.png" alt="Activity 5" class="activity-image">
                 <span class="activity-name">Sensing light!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=6'">
+            <button class="activity" onclick="iniciarActividad(6)">
                 <span class="activity-number">6</span>
                 <img src="srcs/comm/act6.png" alt="Activity 6" class="activity-image">
                 <span class="activity-name">Display control!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=7'">
+            <button class="activity" onclick="iniciarActividad(7)">
                 <span class="activity-number">7</span>
                 <img src="srcs/comm/act7.png" alt="Activity 7" class="activity-image">
                 <span class="activity-name">Ultrasonic!</span>
             </button>
-            <button class="activity" onclick="window.location.href='mbot2.html?lvl=8'">
+            <button class="activity" onclick="iniciarActividad(8)">
                 <span class="activity-number">8</span>
                 <img src="srcs/comm/act8.png" alt="Activity 8" class="activity-image">
                 <span class="activity-name">Curved movements!</span>
             </button>
         </div>
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyB5G4RxthuaADgJg1-xuJCtR_oOOYrBals",
+          authDomain: "lsrobotics-78127.firebaseapp.com",
+          projectId: "lsrobotics-78127",
+          storageBucket: "lsrobotics-78127.firebasestorage.app",
+          messagingSenderId: "32125955765",
+          appId: "1:32125955765:web:7ee8712982da4005c558fc"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginBtn = document.getElementById('loginBtn');
+        const userInfo = document.getElementById('userInfo');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        let selectedRobot = null;
+
+        function updateUI(user) {
+        if (user) {
+            const fullName = user.displayName || "";
+            const firstName = fullName.split(" ")[0];
+            userInfo.textContent = `Welcome back, ${firstName}!`;
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'block';
+        } else {
+            userInfo.textContent = "";
+            loginBtn.style.display = 'block';
+            logoutBtn.style.display = 'none';
+        }
+        }
+
+        async function registrarUsuario(user) {
+            const usuarioRef = doc(db, "usuarios", user.uid);
+            const snapshot = await getDoc(usuarioRef);
+            if (!snapshot.exists()) {
+                await setDoc(usuarioRef, {
+                uid: user.uid,
+                nombre: user.displayName,
+                email: user.email,
+                seccion: "",
+                grado: ""
+                });
+            }
+        }
+
+        async function registrarEvento(tipo, datosExtra = {}) {
+            if (!auth.currentUser) return;
+
+            try {
+                await addDoc(collection(db, "eventos"), {
+                uid: auth.currentUser.uid,
+                tipo,
+                timestamp: serverTimestamp(),
+                ...datosExtra
+                });
+            } catch (error) {
+                console.error("Register error:", error);
+            }
+        }
+
+        document.querySelector("#dev_cpi").addEventListener("click", async () => {
+            selectedRobot = "CyberPi";
+            localStorage.setItem("selectedRobot", selectedRobot);
+            await registrarEvento("robot", { selectedRobot });
+        });
+
+        document.querySelector("#dev_mb2").addEventListener("click", async () => {
+            selectedRobot = "mBot2";
+            localStorage.setItem("selectedRobot", selectedRobot);
+            await registrarEvento("robot", { selectedRobot });
+            document.getElementById("slide-device").style.display = "none";
+            document.getElementById("slide-mb2").style.display = "flex";
+        });
+
+        window.iniciarActividad = async (nivel) => {
+            const robot = localStorage.getItem("selectedRobot") || "desconocido";
+            await registrarEvento("actividad", { robot, actividad: nivel });
+            window.location.href = `mbot2.html?lvl=${nivel}`;
+        };
+
+        loginBtn.addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
+            try {
+                const result = await signInWithPopup(auth, provider);
+                updateUI(result.user);
+                await registrarUsuario(result.user);
+                await registrarEvento("login");
+            } catch (error) {
+                console.error("Login error:", error);
+            }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await registrarEvento("logout");
+                await signOut(auth);
+                updateUI(null);
+            } catch (error) {
+                console.error("Logout error:", error);
+            }
+        });
+
+        onAuthStateChanged(auth, user => {
+            updateUI(user);
+        });
+
+    </script>
 </body>
 </html>

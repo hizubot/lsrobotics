@@ -122,6 +122,21 @@ function prevSlide() {
     }
 }
 
+async function irHome() {
+    await registrarAccion("home");
+    window.location.href = 'index.html';
+}
+
+async function accionNext() {
+    await registrarAccion("next");
+    nextSlide();
+}
+
+async function accionPrev() {
+    await registrarAccion("previous");
+    prevSlide();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const nivel = getNivelFromURL();
     const title = activityTitles[nivel] || `Not available`;
