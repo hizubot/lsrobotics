@@ -51,7 +51,7 @@
               accion,
               timestamp: serverTimestamp(),
               actividad,
-              diapositiva: (currentSlide + 1) || 0,  // 👈 Aquí agregamos la slide actual
+              diapositiva: currentSlide || 0,
               robot
             });
           } catch (e) {

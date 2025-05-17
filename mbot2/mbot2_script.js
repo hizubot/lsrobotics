@@ -10,7 +10,7 @@ const activityTitles = {
   };
 
 const imageCache = [];
-let currentSlide = 0;
+let currentSlide = 1;
 let endSlideOn = 0;
 
 function getNivelFromURL() {
@@ -49,7 +49,7 @@ function preloadMedia() {
 function updateSlide() {
     const container = document.querySelector(".image-center");
     let mediaElement = document.getElementById("slide-media");
-    const currentSlideData = slides[currentSlide];
+    const currentSlideData = slides[currentSlide - 1];
 
     if (currentSlideData.video) {
         if (!mediaElement || mediaElement.tagName !== "VIDEO") {
@@ -73,7 +73,7 @@ function updateSlide() {
     let textContainer = document.querySelector(".info-box");
     textContainer.style.backgroundColor = "white";
 
-    document.getElementById("slide-number").textContent = String(currentSlide + 1).padStart(2, '0');
+    document.getElementById("slide-number").textContent = String(currentSlide).padStart(2, '0');
     mediaElement.className = currentSlideData.className || "";
 }
 
@@ -102,20 +102,20 @@ function endSlide() {
 }
 
 function nextSlide() {
-    if (currentSlide < slides.length - 1) {
+    if (currentSlide < slides.length) {
         currentSlide++;
         updateSlide();
     } else {
+        currentSlide=slides.length+1;
         endSlide();
         endSlideOn=1;
     }
 }
 
 function prevSlide() {
-    if (currentSlide > 0) {
+    if (currentSlide > 1) {
         currentSlide--;
         if (endSlideOn) {
-            currentSlide++;
             endSlideOn=0;
         }
         updateSlide();
