@@ -64,6 +64,11 @@
         onAuthStateChanged(auth, user => {
             if (!user && location.hostname === "localhost") {
                 console.warn("Not authenticated");
+                return;
+            }
+
+            if (user) {
+                registrarAccion("start");
             }
         });
       </script>      

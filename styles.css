@@ -237,6 +237,24 @@ body {
     bottom: -20px;
 }
 
+#status {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+#graficoContenedor {
+    width: 95vw;
+    height: 80vh;
+    max-width: 1100px;
+    max-height: 90vh;
+}
+
+#graficoAvance {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 @keyframes shake {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(1deg); }
