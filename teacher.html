@@ -10,7 +10,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
-        import { getFirestore, collection, query, onSnapshot, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+        import { getFirestore, collection, query, onSnapshot, doc, getDoc, getDocs, where, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB5G4RxthuaADgJg1-xuJCtR_oOOYrBals",
@@ -96,23 +96,30 @@
             const [dH, dM] = desdeHora.split(":").map(Number);
             const [hH, hM] = hastaHora.split(":").map(Number);
 
-            const desdeTimestamp = new Date(year, month - 1, day, dH, dM).getTime() / 1000;
-            const hastaTimestamp = new Date(year, month - 1, day, hH, hM).getTime() / 1000;
+            const desde = new Date(year, month - 1, day, dH, dM);
+            const hasta = new Date(year, month - 1, day, hH, hM);
 
-            // Detener la suscripción anterior si existe
             if (unsubscribe) unsubscribe();
 
-            const q = query(collection(db, "acciones"));
+            let filtros = [
+            where("timestamp", ">=", Timestamp.fromDate(desde)),
+            where("timestamp", "<=", Timestamp.fromDate(hasta)),
+            orderBy("timestamp", "asc")
+            ];
+
+            if (actividadFiltro) {
+            filtros.push(where("actividad", "==", actividadFiltro));
+            }
+
+            const q = query(collection(db, "acciones"), ...filtros);
+
             unsubscribe = onSnapshot(q, (querySnapshot) => {
                 const datosPorUID = {};
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-
                     const ts = data.timestamp?.seconds;
-                    if (!ts || ts < desdeTimestamp || ts > hastaTimestamp) return;
-
-                    if (actividadFiltro && data.actividad !== actividadFiltro) return;
+                    if (!ts) return;
 
                     const uid = data.uid;
                     if (!datosPorUID[uid]) datosPorUID[uid] = [];
@@ -139,8 +146,8 @@
                     data: { datasets },
                     options: {
                         scales: {
-                            x: { type: 'time', time: { unit: 'minute' }, title: { display: true, text: 'Hora' } },
-                            y: { title: { display: true, text: 'Diapositiva' }, beginAtZero: true }
+                            x: { type: 'time', time: { unit: 'minute' }, min: desde, max: hasta, title: { display: true, text: 'Hora' } },
+                            y: { title: { display: true, text: 'Diapositiva' }, beginAtZero: true, max: 25 }
                         },
                         maintainAspectRatio: false
                     }
@@ -175,7 +182,7 @@
                 <option value="8">Actividad 8</option>
             </select>
         </label>
-        <button onclick="filtrarYGraficar()">Filtrar</button>
+        <button onclick="filtrarYGraficar()" class="button">Filtrar</button>
     </div>
     <p id="status">Verificando acceso...</p>
     <script>
@@ -185,6 +192,25 @@
         const mm = String(hoy.getMonth() + 1).padStart(2, '0');
         const dd = String(hoy.getDate()).padStart(2, '0');
         document.getElementById("fecha").value = `${yyyy}-${mm}-${dd}`;
+    });
+    </script>
+    <style>
+    #pantallaNegra {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background-color: white;
+    }
+    </style>
+    <div id="pantallaNegra"></div>
+    <script>
+    let oculto = false;
+    window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+        oculto = !oculto;
+        document.getElementById("pantallaNegra").style.display = oculto ? "block" : "none";
+        }
     });
     </script>
 </body>
